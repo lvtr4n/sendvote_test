@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+    <body>
+      <div class="container">
+        <div ng-app="mySendVote" ng-controller="controlSendVote">
+          <h6><b>Please create 5 opinions for the following topic:</b></h6>
+          <h4 class="light">{{topic}}</h4>
+
+          <p>New opinion:</p>
+          <div class="row">
+            <div class="col s10"><input type="text" ng-model="new"></div>
+            <div class="col s2"><a ng-click="add()" class="btn-floating btn-small waves-effect waves-light green accent-4"><i class="material-icons">add</i></a></div>
+          <table>
+            <tr ng-repeat="o in opinions track by $index | orderBy:'opinion'">
+              <td ng-if="$odd" style="background-color:#d3d3d3">{{$index + 1}}</td>
+              <td ng-if="$even">{{$index + 1}}</td>
+              <td ng-if="$odd" style="background-color:#d3d3d3">{{o}}</td>
+              <td ng-if="$even">{{o}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </body>
+
+    <script>
+      var app = angular.module('mySendVote', []);
+      app.controller('controlSendVote', function($scope) {
+        $scope.topic= "Hollywood needs to stop romanticizing entrepreneurship.";
+        $scope.opinions = [];
+        $scope.add = function() {
+          if($scope.new) {
+            $scope.opinions.push($scope.new);
+          }
+        }
+      });
+    </script>
+</html>
